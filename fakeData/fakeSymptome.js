@@ -2,16 +2,16 @@ export const FakeSymptome = [
     {
         id: 1,
         img : 'img1.jpg',
-        libelle : 'Mal de tete'
+        libelle : 'Les heroes'
     },
     {
         id: 2,
         img : 'img1.jpg',
-        libelle : 'Fievre'
+        libelle : 'Les méchants'
     },
     {
         id: 3,
         img : 'img1.jpg',
-        libelle : 'Rhume'
+        libelle : 'Les villes'
     }
 ]

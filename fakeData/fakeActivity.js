@@ -1,16 +1,19 @@
 export const FakeActivity = [
     {
         id: 1,
-        mainText: 'Docteur à domicile',
-        subText: 'Votre docteur à domicile'
+        mainText: 'Final Fantasy VII',
+        subText: 'Playstation 1997',
+        game: 'ff7'
     }, {
         id: 2,
-        mainText: 'Clinique pour vous',
-        subText: 'Une clique pour vous soigner',
+        mainText: 'Final Fantasy VI',
+        subText: 'SuperNes 1994',
+        game: 'ff6'
     },
     {
         id: 3,
         mainText: 'Traitement de qualité',
         subText: 'Vous aurez un traitement de qualité',
+        game: 'ff9'
     }
 ]

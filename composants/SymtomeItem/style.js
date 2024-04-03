@@ -1,6 +1,8 @@
 import { StyleSheet } from "react-native";
 import { PADDING } from "../../outils/constantes";
 
+
+
 const style = StyleSheet.create({
     item: {
         marginRight: 15,
