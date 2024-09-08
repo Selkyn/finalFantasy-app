@@ -2,109 +2,95 @@ import { View, Text, ScrollView, Image, FlatList, TouchableOpacity } from 'react
 import React, { useState } from 'react'
 import './style.js'
 import homeStyles from './style.js'
-import { FakeActivity } from '../../fakeData/fakeActivity.js'
-// import { SvgXml } from 'react-native-svg';
+import { FakeGame } from '../../fakeData/fakeGame.js'
 import HospitalSvg from '../../assets/svg/pacman.svg';
-import ActivityItem from '../../composants/ActivityItem/index.js'
-import { FakeSymptome } from '../../fakeData/fakeSymptome.js'
-import SymptomeItem from '../../composants/SymtomeItem/index.js'
-import { FakeDoctor } from '../../fakeData/fakeDoctor.js'
+import GameItem from '../../composants/GameItem/index.js'
+import { FakeCharType } from '../../fakeData/fakeCharType.js'
+import CharTypeItem from '../../composants/CharTypeItem/index.js'
+import { FakeCharacter } from '../../fakeData/fakeCharacter.js'
 import CharacterDetails from '../CharacterDetails/index.js'
 import CharactersList from '../../composants/CharactersList/index.js'
+import {  auth } from '../../FirebaseConfig';
+
 
 const Home = ({item, navigation}) => {
-  const [selectedGame, setSelectedGame] = useState(null);
+  const user = auth.currentUser;
 
-  const handleGamePress = (game) => {
-    setSelectedGame(game);
-  }
+const [selectedGame, setSelectedGame] = useState(null);
+const [selectedType, setSelectedType] = useState(null);
+const [selectedGameId, setSelectedGameId] = useState(null);
+const [selectedTypeId, setSelectedTypeId] = useState(null);
 
-  // const filteredDoctors = selectedGame ? FakeDoctor.filter(doctor => doctor.game === selectedGame) : [];
-  let filteredDoctors;
-  if (selectedGame) {
-    filteredDoctors = FakeDoctor.filter(doctor => doctor.game === selectedGame);
-  } else {
-    filteredDoctors = FakeDoctor;
-  }
+      const handleGamePress = (game, id) => {
+        setSelectedGame(game);
+        setSelectedGameId(id);
+        console.log("Selected gameId:", game); // Vérifiez la valeur de selectedGame
+        // console.log("Filtered characters:", FakeCharacter.filter(character => character.game === game));
+      }
+
+      const handleTypePress = (type, id) => {
+        setSelectedType(type);
+        setSelectedTypeId(id);
+      }
+
+
   return (
     <ScrollView>
 
       {/* mon header */}
       <View style={homeStyles.header}>
-        <Text style={homeStyles.userName}>Selkyn Kimery</Text>
+        <Text style={homeStyles.userName}>{user ? user.email : ""}</Text>
         <Image source={require('./../../assets/cloud.jpg')} style={homeStyles.userImg} />
       </View>
 
 
-      {/* liste des activités */}
+      {/* liste des jeux */}
       <FlatList
-        data={FakeActivity}
+        data={FakeGame}
         keyExtractor={item => item.id}
         horizontal={true}
         showsHorizontalScrollIndicator={false}
         style={homeStyles.scrollableList}
         renderItem={({ item }) => {
           return (
-            <ActivityItem
+            <GameItem
+             onPress={() => handleGamePress(item.game, item.id)}
             item={item}
-            onPress={() => handleGamePress(item.game)}
-            
+            isSelected={item.id === selectedGameId}
           />
-          
           )
-          
         }} >
-
       </FlatList>
 
-      {/* List des symptomes */}
+      {/* List des types de personnage */}
       <View style={homeStyles.title}>
         <Text>Quel contenu voulez-vous voir ?</Text>
       </View>
 
       <FlatList
-        data={FakeSymptome}
+        data={FakeCharType} //récupère les données des type de perso
         keyExtractor={item => item.id}
         horizontal={true}
         showsHorizontalScrollIndicator={false}
         style={homeStyles.scrollableList}
         renderItem={({ item }) => {
           return (
-            <SymptomeItem item={item} />
+            <CharTypeItem
+            onPress={() => handleTypePress(item.type, item.id)}
+             item={item} 
+             isSelected={item.id === selectedTypeId}
+             />
           )
         }} >
       </FlatList>
 
-      {/* Liste des docteurs */}
+      {/* Liste des personnages */}
       <View style={homeStyles.title_space_between}>
-        <Text>Nos docteurs</Text>
-        <TouchableOpacity >
-          <Text style={homeStyles.link}>Afficher tout</Text>
-        </TouchableOpacity>
+        <Text>Les personnages</Text>
       </View>
-
-      <CharactersList doctors={filteredDoctors} navigation={navigation} />
-      
-
+      <CharactersList selectedGame={selectedGame} selectedType={selectedType} navigation={navigation} />
     </ScrollView>
   )
 }
 
 export default Home
-
-
-{/* <View style={homeStyles.doctorsContainer}>
-        {FakeDoctor.map((doctor, index) => {
-          return (
-            <TouchableOpacity key={doctor.id} style={homeStyles.doctorCard} onPress={() => navigation.navigate('CharacterDetails', {item})}>
-
-            <Image source={{uri: `${doctor.img}`}} style={homeStyles.doctorImg} />
-              <View>
-                <Text style={homeStyles.doctorName}>{doctor.fullName}</Text>
-                <Text style={homeStyles.spec}>{doctor.speciality}</Text>
-              </View>
-
-            </TouchableOpacity>
-          );
-        })}
-      </View> */}

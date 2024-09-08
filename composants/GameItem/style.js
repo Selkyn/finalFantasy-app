@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { COLORS } from '../../outils/constantes';
 
 const styles = StyleSheet.create({
     scrollableListItem: {
@@ -7,6 +8,10 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         marginRight: 15,
         elevation: 1,
+    },
+
+    selectedItem: {
+        backgroundColor: COLORS.main,
     },
 
     mainText: {

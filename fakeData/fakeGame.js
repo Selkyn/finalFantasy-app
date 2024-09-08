@@ -1,4 +1,4 @@
-export const FakeActivity = [
+export const FakeGame = [
     {
         id: 1,
         mainText: 'Final Fantasy VII',
@@ -12,8 +12,8 @@ export const FakeActivity = [
     },
     {
         id: 3,
-        mainText: 'Traitement de qualité',
-        subText: 'Vous aurez un traitement de qualité',
+        mainText: 'Final Fantasy IX',
+        subText: 'Playsation 1999',
         game: 'ff9'
     }
 ]

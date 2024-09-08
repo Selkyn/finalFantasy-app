@@ -3,12 +3,12 @@ import { COLORS, PADDING } from '../../outils/constantes'
 
 
 const styles = StyleSheet.create({
-doctorsContainer: {
+charactersContainer: {
     marginTop: 15,
     paddingHorizontal: PADDING.horizontal,
     paddingVertical: PADDING.vertical,
 },
-doctorCard: {
+characterCard: {
     flex: 1,
     flexDirection: 'row',
     backgroundColor: 'white',
@@ -19,13 +19,13 @@ doctorCard: {
     marginBottom: 20,
     borderRadius: 8
 },
-doctorImg: {
+characterImg: {
     width: 80,
     height: 80,
     borderRadius: 80/2,
     marginRight: 15
 },
-doctorName: {
+characterName: {
     fontWeight: 'bold',
     fontSize: 16
 },
